@@ -82,6 +82,17 @@ DSH config (`cordis.patch.yml`):
 > behavior (its `authenticateBasic` middleware), not something this add-on
 > adds — any HTTP Basic auth client works the same way.
 
+## Known issues (upstream)
+
+These tools fail against Node-RED 4.x due to bugs in upstream
+`ziv-daniel/node-red-mcp` (not this add-on):
+
+- `get_runtime_info` — calls `/admin/info`, which is not a Node-RED endpoint.
+- `get_installed_modules` — calls `/nodes` without an `Accept: application/json`
+  header, so Node-RED returns HTML instead of JSON.
+
+We intentionally do not patch upstream; these will work once fixed upstream.
+
 ## Notes
 
 - `semantic_search_flows` downloads the `Xenova/all-MiniLM-L6-v2` embedding
