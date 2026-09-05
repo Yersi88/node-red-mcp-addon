@@ -1,5 +1,5 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:21.0.3
+FROM ${BUILD_FROM}
 
 # Install build dependencies (Alpine 3.24 base ships nodejs 22+)
 RUN apk add --no-cache git nodejs npm
