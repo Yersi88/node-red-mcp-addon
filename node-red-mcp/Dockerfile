@@ -15,4 +15,5 @@ RUN git clone --depth 1 https://github.com/ziv-daniel/node-red-mcp.git /opt/node
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-CMD [ "/run.sh" ]
+# Override the base image's s6-overlay /init entrypoint
+ENTRYPOINT [ "/run.sh" ]
