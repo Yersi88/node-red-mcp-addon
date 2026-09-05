@@ -70,7 +70,17 @@ DSH config (`cordis.patch.yml`):
     serverName: nodered
     transport: streamable-http
     url: http://192.168.100.156:3000/mcp
+    headers:
+      Authorization: 'Basic <base64(username:password)>'
 ```
+
+> **Basic auth header:** the `Authorization` value is standard HTTP Basic auth
+> (RFC 7617) — the string `username:password` base64-encoded, prefixed with
+> `Basic `. For example, `alice` / `secret` becomes
+> `Basic YWxpY2U6c2VjcmV0`. Generate it with
+> `echo -n 'username:password' | base64`. This is upstream node-red-mcp
+> behavior (its `authenticateBasic` middleware), not something this add-on
+> adds — any HTTP Basic auth client works the same way.
 
 ## Notes
 
