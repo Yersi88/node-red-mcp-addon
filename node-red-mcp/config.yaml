@@ -1,0 +1,37 @@
+name: Node-RED MCP Server
+version: "1.0.0"
+slug: nodered_mcp
+description: >-
+  Exposes Node-RED flow management (CRUD, context, modules, diagnostics) as a
+  Model Context Protocol (MCP) server, so AI agents like DSH can control your
+  Node-RED automations.
+url: https://github.com/Yersi88/node-red-mcp-addon
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: application
+boot: auto
+host_network: true
+options:
+  nodered_url: "http://127.0.0.1:46836"
+  nodered_username: ""
+  nodered_password: ""
+  mcp_port: 3000
+  mcp_read_only: false
+  mcp_username: ""
+  mcp_password: ""
+  log_level: "info"
+schema:
+  nodered_url: str
+  nodered_username: str
+  nodered_password: password
+  mcp_port: port
+  mcp_read_only: bool
+  mcp_username: str
+  mcp_password: password
+  log_level: list(trace|debug|info|warn|error)
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: MCP endpoint (Streamable HTTP, POST /mcp)

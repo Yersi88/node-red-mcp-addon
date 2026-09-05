@@ -1,0 +1,8 @@
+# Node modules / build artifacts
+node_modules/
+dist/
+*.log
+
+# OS / editor
+.DS_Store
+*.swp
