@@ -1,0 +1,21 @@
+diff --git a/src/services/nodered-api.ts b/src/services/nodered-api.ts
+index b2a4e00..614fb54 100644
+--- a/src/services/nodered-api.ts
++++ b/src/services/nodered-api.ts
+@@ -592,8 +592,14 @@ export class NodeRedAPIClient {
+    */
+   async getRuntimeInfo(): Promise<NodeRedRuntimeInfo> {
+     try {
+-      const response = await this.client.get('/admin/info');
+-      return response.data;
++      const response = await this.client.get('/settings');
++      const settings = response.data;
++      return {
++        version: settings.version,
++        nodes: {},
++        modules: {},
++        memory: { rss: 0, heapTotal: 0, heapUsed: 0, external: 0 },
++      };
+     } catch (error) {
+       handleNodeRedError(error, 'getRuntimeInfo');
+     }

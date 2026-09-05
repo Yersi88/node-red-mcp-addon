@@ -4,9 +4,13 @@ FROM ${BUILD_FROM}
 # Install build dependencies (Alpine 3.24 base ships nodejs 22+)
 RUN apk add --no-cache git nodejs npm
 
+# Copy the getRuntimeInfo patch (fixes /admin/info -> /settings)
+COPY patches/getruntimeinfo.patch /tmp/getruntimeinfo.patch
+
 # Build node-red-mcp from source
 RUN git clone --depth 1 https://github.com/ziv-daniel/node-red-mcp.git /opt/node-red-mcp \
     && cd /opt/node-red-mcp \
+    && git apply /tmp/getruntimeinfo.patch \
     && npm install --legacy-peer-deps --no-audit --no-fund \
     && npx tsup \
     && rm -rf .git
